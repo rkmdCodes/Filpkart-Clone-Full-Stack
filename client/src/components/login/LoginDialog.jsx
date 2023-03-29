@@ -1,7 +1,7 @@
 import React, { Fragment,useState,useContext } from "react";
 import { Box, DialogContent ,Dialog, TextField, Button, Typography,styled } from "@mui/material";
 import { DataContext } from "../../context/dataProvider";
-import { authenticateSignup } from '../../service/api';
+import { authenticateSignup,authenticateLogin } from '../../service/api';
 
 const Component = styled(DialogContent)`
   height: 70vh;
@@ -55,11 +55,11 @@ const Wrapper = styled(Box)`
 `;
 
 const Error = styled(Typography)`
-  fontSize: 10px;
+  fontSize: 2px;
   color: #ff6161;
-  line-height: 0;
+  line-height: auto;
   marginTop: 10px;
-  font-weight: 600;
+  font-weight: 400;
 `;
 // height: 70vh;
 
@@ -125,15 +125,15 @@ const onInputChange = (e) => {
 
 const loginUser = async() => {
 
-    // let response = await authenticateLogin(login);
-    // if(!response) 
-    //     showError(true);
-    // else
-    //  {
-    //     showError(false);
-    //     handleClose();
-    //     setAccount(login.username);
-    //  }
+    let response = await authenticateLogin(login);
+    if(!response) 
+        showError(true);
+    else
+     {
+        showError(false);
+        handleClose();
+        setAccount(login.username);
+     }
     
 }
 
@@ -165,8 +165,8 @@ const toggleSignup = () => {
                     {
                         account.view === 'login' ? 
                         <Wrapper>
-                            <TextField variant="standard" onChange={(e) => onValueChange(e)} name='username' label='Enter Email/Mobile number' />
-                            { error && <Error>Please enter valid Email ID/Mobile number</Error> }
+                            <TextField variant="standard" onChange={(e) => onValueChange(e)} name='username' label='Enter Username' />
+                            { error && <Error>Please Enter a valid username and password</Error> }
                             <TextField variant="standard" onChange={(e) => onValueChange(e)} name='password' label='Enter Password' />
                             <Text>By continuing, you agree to Flipkart's Terms of Use and Privacy Policy.</Text>
                             <LoginButton onClick={() => loginUser()} >Login</LoginButton>
