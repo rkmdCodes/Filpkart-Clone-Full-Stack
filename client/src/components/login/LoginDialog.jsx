@@ -1,6 +1,6 @@
-import React, { Fragment,useState } from "react";
+import React, { Fragment,useState,useContext } from "react";
 import { Box, DialogContent ,Dialog, TextField, Button, Typography,styled } from "@mui/material";
-
+import { DataContext } from "../../context/dataProvider";
 import { authenticateSignup } from '../../service/api';
 
 const Component = styled(DialogContent)`
@@ -29,7 +29,7 @@ const RequestOTP = styled(Button)`
 
 const Text = styled(Typography)`
   color: #878787;
-  font-size: 12px;
+  fontSize: 12px;
 `;
 
 const CreateAccount = styled(Typography)`
@@ -37,7 +37,7 @@ const CreateAccount = styled(Typography)`
   text-align: center;
   color: #2874f0;
   font-weight: 600;
-  font-size: 14px;
+  fontSize: 14px;
   cursor: pointer;
 `;
 
@@ -55,10 +55,10 @@ const Wrapper = styled(Box)`
 `;
 
 const Error = styled(Typography)`
-  font-size: 10px;
+  fontSize: 10px;
   color: #ff6161;
   line-height: 0;
-  margin-top: 10px;
+  marginTop: 10px;
   font-weight: 600;
 `;
 // height: 70vh;
@@ -107,13 +107,14 @@ const accountInitialValues = {
 
 
 
-const LoginDialog = ({ open, setOpen,setAccount }) => {
+const LoginDialog = ({ open, setOpen}) => {
 
   const [ login, setLogin ] = useState(loginInitialValues);
   const [ signup, setSignup ] = useState(signupInitialValues);
   const [ error, showError] = useState(false);
   const [ account, toggleAccount ] = useState(accountInitialValues.login);
-
+   const {setAccount} = useContext(DataContext);
+  
   const onValueChange = (e) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
 }
@@ -123,18 +124,22 @@ const onInputChange = (e) => {
 }
 
 const loginUser = async() => {
+
     // let response = await authenticateLogin(login);
     // if(!response) 
     //     showError(true);
-    // else {
+    // else
+    //  {
     //     showError(false);
     //     handleClose();
     //     setAccount(login.username);
-    // }
+    //  }
+    
 }
 
 const signupUser = async() => {
     let response = await authenticateSignup(signup);
+    console.log(response);
     if(!response) return;
     handleClose();
     setAccount(signup.username);
