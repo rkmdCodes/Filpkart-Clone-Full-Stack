@@ -70,6 +70,7 @@ export default function CustomButton() {
       account ? 
        <Profile  />:
      <Box>
+       
         <LoginButton variant="contained" onClick={()=>openDialog()}>Login</LoginButton>
      </Box>
     }
