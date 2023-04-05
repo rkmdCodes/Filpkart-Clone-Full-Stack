@@ -3,6 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { bannerData } from "../../constants/data";
 import { styled } from "@mui/material";
+import Slide from "./Slide.jsx";
 
 const Image = styled("img")({
   width: "100%",
