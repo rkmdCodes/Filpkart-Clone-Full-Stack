@@ -8,6 +8,7 @@ import {getProduct} from "../../redux/actions/productActions";
 import {useDispatch,useSelector} from "react-redux";
 import Slide from "./Slide.jsx";
 import MidSlide from "./MidSlide.jsx";
+import MidSection from "./MidSection.jsx";
 
 const Container = styled(Box)`
   padding:10px;
@@ -29,6 +30,7 @@ const Home = () => {
       <Container>
         <Banner />
         <MidSlide products = {products} title="Deal Of The Day" timer={true}/>
+        <MidSection/>
         <Slide products = {products} title="Discounts For You" timer={false}/>
         <Slide products = {products} title="Suggesting Items" timer={false}/>
         <Slide products = {products} title="Top Selections" timer={false}/>
