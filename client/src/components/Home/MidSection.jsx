@@ -7,12 +7,16 @@ margin-top:10px;
 justify-content:space-between;
 `;
 
-const Image = styled('img')({
+const Image = styled('img')( ({theme})=>({
    marginTop:"10px",
    width:"100%",
    display:"flex",
    justifyContent:"space-between",
-});
+   [theme.breakpoints.down('md')]:{
+      objectFit:'cover',
+      height:120,
+   }
+}));
 
 
 const MidSection = () => {

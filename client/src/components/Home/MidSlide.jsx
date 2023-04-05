@@ -6,18 +6,26 @@ const Component = styled(Box)`
   display: flex;
 `;
 
-const CarouselComponent = styled(Box)`
-  width: 83%;
-`;
+const CarouselComponent = styled(Box)(({theme})=>({
+      width:'83%',
+      [theme.breakpoints.down('md')]:{
+        width:'100%'
+     }
+}));
 
-const AdComponent = styled(Box)`
-  background: #ffffff;
-  padding: 5px;
-  margin-top:10px;
-  margin-left:10px;
-  width:17%;
-  text-align:center;
-`;
+const AdComponent = styled(Box)(({theme})=>(
+{
+    background: '#ffffff',
+    padding: '5px',
+    marginTop:'10px',
+    marginLeft:'10px',
+    width:'17%',
+    textAlign:'center',
+    [theme.breakpoints.down('md')]:{
+        display:'none',
+     }
+}
+));
 
 const MidSlide = ({ products, title, timer }) => {
   const adURL =
