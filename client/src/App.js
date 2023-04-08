@@ -5,18 +5,22 @@ import Home from "./components/Home/Home.jsx";
 import { Box } from "@mui/material";
 import NavBar from "./components/Home/NavBar";
 import DataProvider from "./context/dataProvider";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import DetailView from "./components/details/DetailView";
 
 function App() {
   return (
- 
-      <DataProvider>
+    <DataProvider>
+      <BrowserRouter>
         <Header />
         <Box style={{ marginTop: 54 }}>
-          <Home />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/product/:id" element={<DetailView />} />
+          </Routes>
         </Box>
-      </DataProvider>
-     
-      
+      </BrowserRouter>
+    </DataProvider>
   );
 }
 

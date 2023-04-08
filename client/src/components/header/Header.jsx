@@ -2,16 +2,19 @@ import { AppBar, Toolbar, styled, Box, Typography } from "@mui/material";
 import { fontSize } from "@mui/system";
 import Search from "./Search";
 import CustomButton from "./CustomButton";
+import { Link } from "react-router-dom";
 
 const StyledHeader = styled(AppBar)`
   background: #2874f0;
   hight: 55px;
 `;
 
-
 const Component = styled(Box)`
   margin-left: 12%;
   line-height: 0;
+  text-decoration: none;
+  color: inherit;
+  cursor:pointer;
 `;
 
 const SubHeading = styled(Typography)`
@@ -22,16 +25,15 @@ const SubHeading = styled(Typography)`
 const PlusImage = styled("img")({
   width: 10,
   height: 10,
-  marginLeft:4
+  marginLeft: 4,
 });
 
-const CustomButtonWrapper = styled('span')(({ theme }) => ({ 
-  margin: '0 5% 0 auto', 
-  [theme.breakpoints.down('sm')]: {
-      display: 'none'
-  }
+const CustomButtonWrapper = styled("span")(({ theme }) => ({
+  margin: "0 5% 0 auto",
+  [theme.breakpoints.down("sm")]: {
+    display: "none",
+  },
 }));
-
 
 const Header = () => {
   const logoURL =
@@ -41,10 +43,11 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <Toolbar style={{minHeight:55}} >
-        <Component>
-        <img src={logoURL} alt="logo" style={{ width: 75 }} />
-          <Box style={{display:'flex'}}>
+      <Toolbar style={{ minHeight: 55 }}>
+        <Component >
+           <Link to='/' style={{textDecoration:"none",color:"inherit"}}>
+          <img src={logoURL} alt="logo" style={{ width: 75 }} />
+          <Box style={{ display: "flex" }}>
             <SubHeading>
               Explore&nbsp;
               <Box component="span" style={{ color: "#ffE500" }}>
@@ -53,10 +56,11 @@ const Header = () => {
             </SubHeading>
             <PlusImage src={subURL} alt="sub logo image" />
           </Box>
+          </Link>
         </Component>
-        <Search/>
+        <Search />
         <CustomButtonWrapper>
-             <CustomButton/>
+          <CustomButton />
         </CustomButtonWrapper>
       </Toolbar>
     </StyledHeader>
