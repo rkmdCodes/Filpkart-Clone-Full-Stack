@@ -1,8 +1,22 @@
-import { AppBar, Toolbar, styled, Box, Typography } from "@mui/material";
-import { fontSize } from "@mui/system";
+import { useState } from "react";
+
+import {
+  List,
+  ListItem,
+  AppBar,
+  Toolbar,
+  styled,
+  Box,
+  Typography,
+  Drawer,
+  IconButton,
+} from "@mui/material";
+
 import Search from "./Search";
 import CustomButton from "./CustomButton";
 import { Link } from "react-router-dom";
+
+import { Menu } from "@mui/icons-material";
 
 const StyledHeader = styled(AppBar)`
   background: #2874f0;
@@ -14,7 +28,7 @@ const Component = styled(Box)`
   line-height: 0;
   text-decoration: none;
   color: inherit;
-  cursor:pointer;
+  cursor: pointer;
 `;
 
 const SubHeading = styled(Typography)`
@@ -30,8 +44,15 @@ const PlusImage = styled("img")({
 
 const CustomButtonWrapper = styled("span")(({ theme }) => ({
   margin: "0 5% 0 auto",
-  [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.down("md")]: {
     display: "none",
+  },
+}));
+
+const StyledMenu = styled(IconButton)(({ theme }) => ({
+  display: "none",
+  [theme.breakpoints.down("md")]: {
+    display: "block",
   },
 }));
 
@@ -41,21 +62,49 @@ const Header = () => {
   const subURL =
     "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/plus_aef861.png";
 
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const list = () => {
+    return (
+      <Box width="200px" handleClick={handleClose}>
+        <List>
+          <ListItem>
+            <CustomButton />
+          </ListItem>
+        </List>
+      </Box>
+    );
+  };
+
   return (
     <StyledHeader>
       <Toolbar style={{ minHeight: 55 }}>
-        <Component >
-           <Link to='/' style={{textDecoration:"none",color:"inherit"}}>
-          <img src={logoURL} alt="logo" style={{ width: 75 }} />
-          <Box style={{ display: "flex" }}>
-            <SubHeading>
-              Explore&nbsp;
-              <Box component="span" style={{ color: "#ffE500" }}>
-                Plus
-              </Box>
-            </SubHeading>
-            <PlusImage src={subURL} alt="sub logo image" />
-          </Box>
+        <StyledMenu color="inherit" onClick={() => handleOpen()}>
+          <Menu />
+        </StyledMenu>
+        <Drawer open={open} close={handleClose}>
+          {list()}
+        </Drawer>
+        <Component>
+          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+            <img src={logoURL} alt="logo" style={{ width: 75 }} />
+            <Box style={{ display: "flex" }}>
+              <SubHeading>
+                Explore&nbsp;
+                <Box component="span" style={{ color: "#ffE500" }}>
+                  Plus
+                </Box>
+              </SubHeading>
+              <PlusImage src={subURL} alt="sub logo image" />
+            </Box>
           </Link>
         </Component>
         <Search />
